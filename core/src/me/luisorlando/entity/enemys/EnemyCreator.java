@@ -48,12 +48,12 @@ public class EnemyCreator extends Enemy {
             setSize(PIXELS_IN_METER * size * 2, PIXELS_IN_METER * size * 2);
         } else if (type == EnemyType.CASCO) {
             circle.setRadius(1f);
-            textureRegion = new TextureRegion(texture, 0, 0, 203, 20);
-            setSize(PIXELS_IN_METER * size * 2 * 4, PIXELS_IN_METER * size * 2);
+            textureRegion = new TextureRegion(texture, 0, 0, 93, 83);
+            setSize(PIXELS_IN_METER * size * 2, PIXELS_IN_METER * size * 2);
         } else if (type == EnemyType.BIGOTE) {
-            circle.setRadius(1f);
-            textureRegion = new TextureRegion(texture, 0, 0, 203, 20);
-            setSize(PIXELS_IN_METER * size * 2 * 4, PIXELS_IN_METER * size * 2);
+            circle.setRadius(1.5f);
+            textureRegion = new TextureRegion(texture, 0, 0, 109, 99);
+            setSize(PIXELS_IN_METER * size * 3, PIXELS_IN_METER * size * 3);
         }
 
         FixtureDef fixtureDef = new FixtureDef();
