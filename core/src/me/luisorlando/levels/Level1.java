@@ -47,7 +47,7 @@ public class Level1 implements Level {
     }
 
     public void generateEnemys(Stage stage, World world) {
-        enemigos.add(new EnemyCreator(EnemyType.NORMAL, stage, world, new Vector2(32, floor + 10)));
-        enemigos.add(new EnemyCreator(EnemyType.CASCO, stage, world, new Vector2(37, floor + 10)));
+        enemigos.add(new EnemyCreator(EnemyType.NORMAL, stage, world, new Vector2(32, floor + 2)));
+        enemigos.add(new EnemyCreator(EnemyType.CASCO, stage, world, new Vector2(37, floor + 2)));
     }
 }
