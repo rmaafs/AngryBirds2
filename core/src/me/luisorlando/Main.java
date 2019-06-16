@@ -16,6 +16,7 @@ public class Main extends Game {
 		manager = new AssetManager();
 
 		manager.load("fondo.png", Texture.class);
+        manager.load("resortera.png", Texture.class);
 
 		manager.load("materials/glass.png", Texture.class);
 		manager.load("materials/stone.png", Texture.class);

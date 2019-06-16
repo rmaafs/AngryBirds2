@@ -85,6 +85,7 @@ public class GameScreen extends Pantalla {
         stage.act();
         world.step(delta, 8, 3);
         stage.draw();
+        player.dibujarResortera();
         rate.render();
 
 
