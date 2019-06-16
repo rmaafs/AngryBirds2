@@ -25,6 +25,10 @@ public class Main extends Game {
 		manager.load("birds/white.png", Texture.class);
 		manager.load("birds/yellow.png", Texture.class);
 
+        manager.load("enemigos/normal.png", Texture.class);
+        manager.load("enemigos/casco.png", Texture.class);
+        manager.load("enemigos/bigote.png", Texture.class);
+
 
 		manager.finishLoading();
 		setScreen(new GameScreen(this));

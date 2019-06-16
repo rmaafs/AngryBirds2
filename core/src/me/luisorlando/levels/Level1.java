@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import me.luisorlando.entity.enemys.Enemy;
+import me.luisorlando.entity.enemys.EnemyCreator;
+import me.luisorlando.entity.enemys.EnemyType;
 import me.luisorlando.materials.BoxType;
 import me.luisorlando.materials.Material;
 import me.luisorlando.materials.MaterialCreator;
@@ -15,6 +18,10 @@ public class Level1 implements Level {
 
     public void play(){
         for (Material m : materiales){
+            m.startDraw();
+        }
+
+        for (Enemy m : enemigos) {
             m.startDraw();
         }
     }
@@ -35,5 +42,11 @@ public class Level1 implements Level {
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 4)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 6)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 8)));
+
+        generateEnemys(stage, world);
+    }
+
+    public void generateEnemys(Stage stage, World world) {
+        enemigos.add(new EnemyCreator(EnemyType.NORMAL, stage, world, new Vector2(35, floor + 10)));
     }
 }
