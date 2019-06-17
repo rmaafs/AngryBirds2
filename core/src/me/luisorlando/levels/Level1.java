@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import me.luisorlando.entity.birds.Bird;
+import me.luisorlando.entity.birds.BirdYellow;
 import me.luisorlando.entity.enemys.Enemy;
 import me.luisorlando.entity.enemys.EnemyCreator;
 import me.luisorlando.entity.enemys.EnemyType;
@@ -22,6 +24,10 @@ public class Level1 implements Level {
         }
 
         for (Enemy m : enemigos) {
+            m.startDraw();
+        }
+
+        for (Bird m : pajaros) {
             m.startDraw();
         }
     }
@@ -44,10 +50,18 @@ public class Level1 implements Level {
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 8)));
 
         generateEnemys(stage, world);
+        generateBirds(stage, world);
     }
 
     public void generateEnemys(Stage stage, World world) {
         enemigos.add(new EnemyCreator(EnemyType.NORMAL, stage, world, new Vector2(32, floor + 2)));
         enemigos.add(new EnemyCreator(EnemyType.CASCO, stage, world, new Vector2(37, floor + 2)));
+    }
+
+    public void generateBirds(Stage stage, World world) {
+        int x = 6;
+        //pajaros.add(new BirdRed(stage, world, new Vector2(x--, floor)));
+        pajaros.add(new BirdYellow(stage, world, new Vector2(x--, floor)));
+        //pajaros.add(new BirdWhite(stage, world, new Vector2(x--, floor)));
     }
 }

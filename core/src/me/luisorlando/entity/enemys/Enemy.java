@@ -1,21 +1,13 @@
 package me.luisorlando.entity.enemys;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import me.luisorlando.Constants;
+import me.luisorlando.entity.Entity;
 
-public class Enemy extends Actor {
-    protected Texture texture;
-    protected TextureRegion textureRegion;
-    protected Stage stage;
-    protected Body body;
+public class Enemy extends Entity {
+
     protected EnemyType type;
-    protected int x = 0, y = 0, size = 1;
     protected float vida = 0f;
 
     public void startDraw() {
