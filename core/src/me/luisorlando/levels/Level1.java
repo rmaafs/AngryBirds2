@@ -5,6 +5,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import me.luisorlando.entity.birds.Bird;
+import me.luisorlando.entity.birds.BirdRed;
+import me.luisorlando.entity.birds.BirdWhite;
 import me.luisorlando.entity.birds.BirdYellow;
 import me.luisorlando.entity.enemys.Enemy;
 import me.luisorlando.entity.enemys.EnemyCreator;
@@ -59,9 +61,9 @@ public class Level1 implements Level {
     }
 
     public void generateBirds(Stage stage, World world) {
-        int x = 6;
-        //pajaros.add(new BirdRed(stage, world, new Vector2(x--, floor)));
-        pajaros.add(new BirdYellow(stage, world, new Vector2(x--, floor)));
-        //pajaros.add(new BirdWhite(stage, world, new Vector2(x--, floor)));
+        float x = 9;
+        pajaros.add(new BirdRed(stage, world, new Vector2(x -= 2f, floor)));
+        pajaros.add(new BirdYellow(stage, world, new Vector2(x -= 1.5, floor)));
+        pajaros.add(new BirdWhite(stage, world, new Vector2(x -= 2, floor)));
     }
 }
