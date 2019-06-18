@@ -7,7 +7,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import me.luisorlando.Listener.BirdClickListener;
 import me.luisorlando.Main;
+import me.luisorlando.entity.Entity;
 import me.luisorlando.entity.birds.Bird;
 
 public class Resortera extends Actor {
@@ -31,8 +33,10 @@ public class Resortera extends Actor {
 
     public void ponerBird(Bird bird) {
         nextBird = bird;
-        nextBird.disableMovement(true);
-        nextBird.cambiarPosicion(new Vector2(8, 12));
+        ((Entity) nextBird).disableMovement(true);
+        ((Entity) nextBird).cambiarPosicion(new Vector2(8, 12));
+        BirdClickListener listener = new BirdClickListener(bird);
+        ((Entity) nextBird).addListener(listener);
     }
 
     @Override

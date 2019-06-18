@@ -1,5 +1,6 @@
 package me.luisorlando.entity.birds;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -52,21 +53,15 @@ public class BirdRed extends Entity implements Bird {
         body.setUserData("BIRD_" + type.toString());
     }
 
-    public void cambiarPosicion(Vector2 pos) {
-        body.setTransform(pos, body.getAngle());
-    }
-
-    public void disableMovement(boolean disable) {
-        if (disable) {
-            body.setType(BodyDef.BodyType.StaticBody);
-        } else {
-            body.setType(BodyDef.BodyType.DynamicBody);
-        }
-    }
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y - 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
+        if (followMouse) {
+            setPosition(Gdx.input.getX() * 3 - getWidth() / 2, (Gdx.graphics.getHeight() - Gdx.input.getY()) * 3 - getHeight() / 2);
+            cambiarPosicion(new Vector2((getX() + getWidth() / 2) / PIXELS_IN_METER, (getY() + getHeight() / 2) / PIXELS_IN_METER));
+        } else {
+            setPosition((body.getPosition().x - 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y - 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
+        }
+
         batch.draw(textureRegion, getX(), getY(), getWidth(), getHeight());
     }
 }

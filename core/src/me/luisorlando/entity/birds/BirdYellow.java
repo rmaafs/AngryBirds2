@@ -49,18 +49,6 @@ public class BirdYellow extends Entity implements Bird {
         body.setUserData("BIRD_" + type.toString());
     }
 
-    public void cambiarPosicion(Vector2 position) {
-        setPosition(position.x, position.y);
-    }
-
-    public void disableMovement(boolean disable) {
-        if (disable) {
-            body.setType(BodyDef.BodyType.StaticBody);
-        } else {
-            body.setType(BodyDef.BodyType.DynamicBody);
-        }
-    }
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
         setPosition((body.getPosition().x + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
