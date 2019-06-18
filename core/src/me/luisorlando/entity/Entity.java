@@ -7,7 +7,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Entity extends Actor {
     protected Texture texture;
@@ -18,8 +22,10 @@ public class Entity extends Actor {
     protected float x = 0, y = 0;
     protected boolean followMouse = false;
 
-    public Entity(){
+    private List<EventListener> listeners;
 
+    public Entity(){
+        listeners = new ArrayList<EventListener>();
     }
 
     public void cambiarPosicion(Vector2 pos) {
@@ -34,7 +40,8 @@ public class Entity extends Actor {
         }
     }
 
-    public void addListener(Object ob) {
+    public void agregarListener(EventListener ob) {
+        listeners.add(ob);
         this.addListener(ob);
     }
 
@@ -53,7 +60,20 @@ public class Entity extends Actor {
             angle += 360;
         }
         System.out.println("Angulo: " + angle);
+
+        for (EventListener ob : listeners) {
+            this.removeListener(ob);
+        }
+
+        for (EventListener ob : listeners) {
+            this.removeListener(ob);
+        }
+
         disableMovement(false);
         body.applyLinearImpulse(new Vector2((x - getX()) / 10, (y - getY()) / 10), new Vector2(x, y), true);
+    }
+
+    public Body getBody() {
+        return body;
     }
 }

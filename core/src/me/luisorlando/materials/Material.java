@@ -33,7 +33,6 @@ public class Material extends Actor{
             setPosition((body.getPosition().x - 0.9f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y - 0.6f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
         }
 
-        System.out.println("Angulo: " + body.getAngle());
         batch.draw(textureRegion, getX(), getY(), getWidth() / 2, getHeight() / 2, getWidth(), getHeight(), 1, 1, (float) Math.toDegrees(body.getAngle()));
     }
 }

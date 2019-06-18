@@ -1,4 +1,4 @@
-package me.luisorlando.Listener;
+package me.luisorlando.Listener.bird;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -27,6 +27,7 @@ public class BirdClickListener extends ClickListener {
         if (esperarSuelte) {
             esperarSuelte = false;
             ((Entity) bird).lanzar();
+            bird.setTextureVolando();
         }
     }
 }

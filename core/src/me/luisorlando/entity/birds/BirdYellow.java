@@ -1,5 +1,6 @@
 package me.luisorlando.entity.birds;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -28,6 +29,14 @@ public class BirdYellow extends Entity implements Bird {
         stage.addActor(this);
     }
 
+    public void setTextureVolando() {
+        textureRegion = new TextureRegion(texture, 57, 0, 58, 54);
+    }
+
+    public void setTextureDañado() {
+        textureRegion = new TextureRegion(texture, 174, 0, 58, 54);
+    }
+
     private void createBox(World world, Stage stage, Vector2 position) {
         this.stage = stage;
         Fixture fixture;
@@ -51,7 +60,12 @@ public class BirdYellow extends Entity implements Bird {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
+        if (followMouse) {
+            setPosition(Gdx.input.getX() * 3 - getWidth() / 2, (Gdx.graphics.getHeight() - Gdx.input.getY()) * 3 - getHeight() / 2);
+            cambiarPosicion(new Vector2((getX() + getWidth() / 2) / PIXELS_IN_METER, (getY() + getHeight() / 2) / PIXELS_IN_METER));
+        } else {
+            setPosition((body.getPosition().x + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
+        }
         batch.draw(textureRegion, getX(), getY(), getWidth(), getHeight());
     }
 }

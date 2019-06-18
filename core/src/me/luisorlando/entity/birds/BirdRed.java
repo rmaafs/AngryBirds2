@@ -30,6 +30,14 @@ public class BirdRed extends Entity implements Bird {
         stage.addActor(this);
     }
 
+    public void setTextureVolando() {
+        textureRegion = new TextureRegion(texture, 44, 0, 45, 44);
+    }
+
+    public void setTextureDañado() {
+        textureRegion = new TextureRegion(texture, 90, 0, 45, 44);
+    }
+
     private void createBox(World world, Stage stage, Vector2 position) {
         this.stage = stage;
         this.x = position.x;
@@ -61,7 +69,6 @@ public class BirdRed extends Entity implements Bird {
         } else {
             setPosition((body.getPosition().x - 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y - 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
         }
-
         batch.draw(textureRegion, getX(), getY(), getWidth(), getHeight());
     }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import me.luisorlando.Constants;
+import me.luisorlando.Listener.bird.BirdColisionListener;
 import me.luisorlando.Main;
 import me.luisorlando.entity.Floor;
 import me.luisorlando.player.Player;
@@ -60,6 +61,7 @@ public class GameScreen extends Pantalla {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(inputs);
+        world.setContactListener(new BirdColisionListener(player));
         player.play();
     }
 
@@ -101,8 +103,8 @@ public class GameScreen extends Pantalla {
     }
 
     private void checkTeclas() {
-        if (Gdx.input.isKeyPressed(Input.Keys.O)) {
-
+        if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
+            player.nextBird();
         }
 
         if (Gdx.input.justTouched()) {

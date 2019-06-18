@@ -1,9 +1,11 @@
 package me.luisorlando.levels;
 
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import me.luisorlando.entity.Entity;
 import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.entity.birds.BirdRed;
 import me.luisorlando.entity.birds.BirdWhite;
@@ -36,7 +38,10 @@ public class Level1 implements Level {
     }
 
     public Bird nextBird() {
-        return pajaros.get(currentBird++);
+        if (currentBird + 1 <= pajaros.size()) {
+            return pajaros.get(currentBird++);
+        }
+        return pajaros.get(currentBird - 1);
     }
 
     public void generate(Stage stage, World world){
@@ -70,5 +75,14 @@ public class Level1 implements Level {
         pajaros.add(new BirdRed(stage, world, new Vector2(x -= 2f, floor)));
         pajaros.add(new BirdYellow(stage, world, new Vector2(x -= 1.5, floor)));
         pajaros.add(new BirdWhite(stage, world, new Vector2(x -= 2, floor)));
+    }
+
+    public Bird getBirdByBody(Body b) {
+        for (Bird bird : pajaros) {
+            if (b == ((Entity) bird).getBody()) {
+                return bird;
+            }
+        }
+        return null;
     }
 }

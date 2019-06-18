@@ -54,4 +54,8 @@ public class Player {
         resortera.play(stage);
         nextBird();
     }
+
+    public Level getNivel() {
+        return nivel;
+    }
 }
