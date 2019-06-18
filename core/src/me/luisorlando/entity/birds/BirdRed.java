@@ -31,6 +31,8 @@ public class BirdRed extends Entity implements Bird {
 
     private void createBox(World world, Stage stage, Vector2 position) {
         this.stage = stage;
+        this.x = position.x;
+        this.y = position.y;
         Fixture fixture;
         BodyDef def;
 
@@ -48,6 +50,18 @@ public class BirdRed extends Entity implements Bird {
         body = world.createBody(def);
         fixture = body.createFixture(fixtureDef);
         body.setUserData("BIRD_" + type.toString());
+    }
+
+    public void cambiarPosicion(Vector2 pos) {
+        body.setTransform(pos, body.getAngle());
+    }
+
+    public void disableMovement(boolean disable) {
+        if (disable) {
+            body.setType(BodyDef.BodyType.StaticBody);
+        } else {
+            body.setType(BodyDef.BodyType.DynamicBody);
+        }
     }
 
     @Override

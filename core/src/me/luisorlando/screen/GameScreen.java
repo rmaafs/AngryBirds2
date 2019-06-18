@@ -82,10 +82,12 @@ public class GameScreen extends Pantalla {
         stage.getBatch().draw(texture, 0, 0, Gdx.graphics.getWidth() * 3, Gdx.graphics.getHeight() * 3);
         stage.getBatch().end();
 
+        player.dibujarResortera();
+
         stage.act();
         world.step(delta, 8, 3);
         stage.draw();
-        player.dibujarResortera();
+
         rate.render();
 
 
@@ -96,9 +98,6 @@ public class GameScreen extends Pantalla {
             camera.position.y = stage.getCamera().position.y / Constants.PIXELS_IN_METER;
             renderer.render(world, camera.combined);
         }
-
-        //stage.getCamera().position.x = player.getX();
-        //stage.getCamera().position.y = player.getY();
     }
 
     private void checkTeclas() {

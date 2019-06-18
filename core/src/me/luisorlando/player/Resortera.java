@@ -8,10 +8,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import me.luisorlando.Main;
+import me.luisorlando.entity.birds.Bird;
 
 public class Resortera extends Actor {
     private TextureRegion texture1, texture2;
     private Vector2 position;
+
+    private Bird nextBird;
 
     private float size = 2f;
 
@@ -24,6 +27,12 @@ public class Resortera extends Actor {
 
     public void play(Stage stage) {
         stage.addActor(this);
+    }
+
+    public void ponerBird(Bird bird) {
+        nextBird = bird;
+        nextBird.disableMovement(true);
+        nextBird.cambiarPosicion(new Vector2(8, 12));
     }
 
     @Override

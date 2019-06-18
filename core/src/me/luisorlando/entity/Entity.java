@@ -12,7 +12,8 @@ public class Entity extends Actor {
     protected TextureRegion textureRegion;
     protected Stage stage;
     protected Body body;
-    protected int x = 0, y = 0, size = 1;
+    protected int size = 1;
+    protected float x = 0, y = 0;
 
     public Entity(){
 

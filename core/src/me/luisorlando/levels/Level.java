@@ -18,4 +18,10 @@ public interface Level {
 
     void play();
     void generate(Stage stage, World world);
+
+    void generateEnemys(Stage stage, World world);
+
+    void generateBirds(Stage stage, World world);
+
+    Bird nextBird();
 }

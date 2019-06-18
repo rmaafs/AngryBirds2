@@ -19,6 +19,7 @@ import me.luisorlando.materials.MaterialType;
 public class Level1 implements Level {
 
     private float floor = 7.35f;
+    private int currentBird = 0;
 
     public void play(){
         for (Material m : materiales){
@@ -32,6 +33,10 @@ public class Level1 implements Level {
         for (Bird m : pajaros) {
             m.startDraw();
         }
+    }
+
+    public Bird nextBird() {
+        return pajaros.get(currentBird++);
     }
 
     public void generate(Stage stage, World world){

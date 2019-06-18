@@ -37,6 +37,10 @@ public class Player {
         generateLevel();
     }
 
+    public void nextBird() {
+        resortera.ponerBird(nivel.nextBird());
+    }
+
     public void dibujarResortera() {
         resortera.drawSegundaParte(stage.getBatch());
     }
@@ -48,5 +52,6 @@ public class Player {
     public void play(){
         nivel.play();
         resortera.play(stage);
+        nextBird();
     }
 }
