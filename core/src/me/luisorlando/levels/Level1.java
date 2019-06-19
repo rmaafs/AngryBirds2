@@ -41,7 +41,7 @@ public class Level1 implements Level {
         if (currentBird + 1 <= pajaros.size()) {
             return pajaros.get(currentBird++);
         }
-        return pajaros.get(currentBird - 1);
+        return null;
     }
 
     public void generate(Stage stage, World world){
@@ -81,6 +81,15 @@ public class Level1 implements Level {
         for (Bird bird : pajaros) {
             if (b == ((Entity) bird).getBody()) {
                 return bird;
+            }
+        }
+        return null;
+    }
+
+    public Material getMaterialByBody(Body b) {
+        for (Material material : materiales) {
+            if (b == material.getBody()) {
+                return material;
             }
         }
         return null;

@@ -40,6 +40,16 @@ public class Resortera extends Actor {
         ((Entity) nextBird).agregarListener(listener);
     }
 
+    public void clickAire() {
+        if (((Entity) nextBird).isFlying()) {
+            nextBird.poderEspecial();
+        }
+    }
+
+    public Bird getCurrentBird() {
+        return nextBird;
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture1, position.x - 50, position.y + 165, texture1.getRegionWidth() * size, texture1.getRegionHeight() * size);

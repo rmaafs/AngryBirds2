@@ -35,6 +35,12 @@ public class BirdYellow extends Entity implements Bird {
 
     public void setTextureDañado() {
         textureRegion = new TextureRegion(texture, 174, 0, 58, 54);
+        firstColission = false;
+        flying = false;
+    }
+
+    public void setTexturePoderEspecial() {
+        textureRegion = new TextureRegion(texture, 118, 0, 58, 54);
     }
 
     private void createBox(World world, Stage stage, Vector2 position) {
@@ -58,6 +64,13 @@ public class BirdYellow extends Entity implements Bird {
         body.setUserData("BIRD_" + type.toString());
     }
 
+    public void poderEspecial() {
+        setTexturePoderEspecial();
+        body.applyForceToCenter(body.getPosition().x + 2000, body.getPosition().y, true);
+        velocity = velocity * 2;
+        System.out.println("Velocidad: " + velocity);
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (followMouse) {
@@ -67,5 +80,10 @@ public class BirdYellow extends Entity implements Bird {
             setPosition((body.getPosition().x + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionWidth(), (body.getPosition().y + 0.1f) * Constants.PIXELS_IN_METER - textureRegion.getRegionHeight());
         }
         batch.draw(textureRegion, getX(), getY(), getWidth(), getHeight());
+    }
+
+    @Override
+    public BirdType getType() {
+        return type;
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -16,13 +17,51 @@ public class Material extends Actor{
     protected MaterialType type;
     protected BoxType boxType;
     protected int size = 1;
-    protected float durability = 0f;
+    protected float durability = 0f, initialDurability = 0f;
     protected Body body;
 
     protected Stage stage;
 
     public void startDraw(){
         stage.addActor(this);
+    }
+
+    public boolean dañar(float daño) {
+        durability -= daño;
+        if (durability < 0) durability = 0;
+
+        int frame = 0;
+
+        if (durability < initialDurability / 4) {
+            frame = 3;
+        } else if (durability < initialDurability / 3) {
+            frame = 2;
+        } else if (durability < initialDurability / 2) {
+            frame = 1;
+        }
+
+        final int fframe = frame;
+
+        new Thread() {
+            @Override
+            public void run() {
+                if (boxType == BoxType.BOX) {
+                    textureRegion = new TextureRegion(texture, 85 * fframe, 85, 84, 84);
+                } else {
+                    textureRegion = new TextureRegion(texture, 0, 20 * fframe, 203, 20);
+                }
+            }
+        }.start();
+
+        System.out.println("FRAME: " + frame);
+
+        return durability == 0;
+    }
+
+    public void eliminar(World world) {
+        world.destroyBody(body);
+        this.remove();
+        this.setVisible(false);
     }
 
     @Override
@@ -34,5 +73,13 @@ public class Material extends Actor{
         }
 
         batch.draw(textureRegion, getX(), getY(), getWidth() / 2, getHeight() / 2, getWidth(), getHeight(), 1, 1, (float) Math.toDegrees(body.getAngle()));
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public MaterialType getType() {
+        return type;
     }
 }

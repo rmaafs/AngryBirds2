@@ -19,8 +19,10 @@ public class Entity extends Actor {
     protected Stage stage;
     protected Body body;
     protected int size = 1;
-    protected float x = 0, y = 0;
+    protected float x = 0, y = 0, velocity = 0f;
     protected boolean followMouse = false;
+    protected boolean firstColission = true;
+    protected boolean flying = false;
 
     private List<EventListener> listeners;
 
@@ -55,6 +57,7 @@ public class Entity extends Actor {
 
     public void lanzar() {
         followMouse = false;
+        flying = true;
         float angle = (float) Math.toDegrees(Math.atan2(y - getY(), x - getX()));
         if (angle < 0) {
             angle += 360;
@@ -69,11 +72,36 @@ public class Entity extends Actor {
             this.removeListener(ob);
         }
 
+        firstColission = true;
         disableMovement(false);
         body.applyLinearImpulse(new Vector2((x - getX()) / 10, (y - getY()) / 10), new Vector2(x, y), true);
+        velocity = (x - getX());
+        System.out.println("Velocidad: " + velocity);
     }
 
     public Body getBody() {
         return body;
+    }
+
+    public boolean isFirstColission() {
+        return firstColission;
+    }
+
+    public void setFirstColission(boolean firstColission) {
+        this.firstColission = firstColission;
+    }
+
+    public boolean isFlying() {
+        return flying;
+    }
+
+    public float getVelocity() {
+        return velocity;
+    }
+
+    public void removeVelocity(float velocity) {
+        this.velocity -= velocity;
+        if (this.velocity < 0) this.velocity = 0;
+        body.applyForceToCenter(-velocity * 5, 0f, true);
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.luisorlando.entity.Entity;
+import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.levels.Level;
 import me.luisorlando.levels.Level1;
 
@@ -15,6 +16,7 @@ public class Player {
     private List<Entity> birds;
     private Level nivel;
     private int currentNivel = 1;
+    private boolean playing = false;
 
     private World world;
     private Stage stage;
@@ -38,7 +40,12 @@ public class Player {
     }
 
     public void nextBird() {
-        resortera.ponerBird(nivel.nextBird());
+        if (resortera.getCurrentBird() == null || !((Entity) (resortera.getCurrentBird())).isFlying()) {
+            Bird b = nivel.nextBird();
+            if (b != null) {
+                resortera.ponerBird(b);
+            }
+        }
     }
 
     public void dibujarResortera() {
@@ -53,9 +60,22 @@ public class Player {
         nivel.play();
         resortera.play(stage);
         nextBird();
+        playing = true;
+    }
+
+    public void clickAire() {
+        resortera.clickAire();
     }
 
     public Level getNivel() {
         return nivel;
+    }
+
+    public boolean isPlaying() {
+        return playing;
+    }
+
+    public World getWorld() {
+        return world;
     }
 }

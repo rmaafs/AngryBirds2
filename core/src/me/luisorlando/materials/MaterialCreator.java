@@ -19,7 +19,7 @@ public class MaterialCreator extends Material {
         this.boxType = boxType;
         if (type == MaterialType.WOOD){
             texture = Main.manager.get("materials/wood.png");
-            durability = 100f;
+            durability = 500f;
         } else if (type == MaterialType.STONE){
             texture = Main.manager.get("materials/stone.png");
             durability = 200f;
@@ -27,6 +27,7 @@ public class MaterialCreator extends Material {
             texture = Main.manager.get("materials/glass.png");
             durability = 50f;
         }
+        initialDurability = durability;
 
         createBox(world, stage, position);
     }
@@ -43,14 +44,13 @@ public class MaterialCreator extends Material {
         shape = new PolygonShape();
 
         if (boxType == BoxType.STICK){
-
             shape.setAsBox(size * 4, size);
             textureRegion = new TextureRegion(texture, 0, 0, 203, 20);
             setSize(PIXELS_IN_METER * size * 2 * 4, PIXELS_IN_METER * size * 2);
 
         } else if (boxType == BoxType.BOX){
             shape.setAsBox(size, size);
-            textureRegion = new TextureRegion(texture, 55, 0, 84, 84);
+            textureRegion = new TextureRegion(texture, 0, 85, 84, 84);
             setSize(PIXELS_IN_METER * size * 2, PIXELS_IN_METER * size * 2);
         }
 

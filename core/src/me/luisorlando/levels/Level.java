@@ -16,15 +16,12 @@ public interface Level {
     List<Material> materiales = new ArrayList<Material>();
     List<Enemy> enemigos = new ArrayList<Enemy>();
     List<Bird> pajaros = new ArrayList<Bird>();
-
     void play();
     void generate(Stage stage, World world);
-
     void generateEnemys(Stage stage, World world);
-
     void generateBirds(Stage stage, World world);
-
     Bird nextBird();
-
     Bird getBirdByBody(Body b);
+
+    Material getMaterialByBody(Body b);
 }

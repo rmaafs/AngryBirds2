@@ -21,7 +21,7 @@ import static me.luisorlando.Main.inputs;
 
 public class GameScreen extends Pantalla {
 
-    private boolean debugBox2d = true;
+    private boolean debugBox2d = false;
 
     private Stage stage;
     private World world;
@@ -107,7 +107,8 @@ public class GameScreen extends Pantalla {
             player.nextBird();
         }
 
-        if (Gdx.input.justTouched()) {
+        if (Gdx.input.justTouched() && player.isPlaying()) {
+            player.clickAire();
             System.out.println("Cursor: " + Gdx.input.getX() / Constants.PIXELS_IN_METER + " (" + Gdx.input.getX() + "), " + Gdx.input.getY() / Constants.PIXELS_IN_METER);
         }
     }
