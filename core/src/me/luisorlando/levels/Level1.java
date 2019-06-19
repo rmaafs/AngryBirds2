@@ -51,10 +51,10 @@ public class Level1 implements Level {
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.STICK, stage, world, new Vector2(35, floor)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.STICK, stage, world, new Vector2(27, floor)));
 
-        materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 2)));
+        /*materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 2)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 4)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 6)));
-        materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 8)));
+        materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 8)));*/
 
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 2)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 4)));
@@ -90,6 +90,15 @@ public class Level1 implements Level {
         for (Material material : materiales) {
             if (b == material.getBody()) {
                 return material;
+            }
+        }
+        return null;
+    }
+
+    public Enemy getEnemyByBody(Body b) {
+        for (Enemy enemy : enemigos) {
+            if (b == enemy.getBody()) {
+                return enemy;
             }
         }
         return null;

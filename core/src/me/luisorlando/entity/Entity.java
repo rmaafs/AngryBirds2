@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.luisorlando.screen.GameScreen;
+
 public class Entity extends Actor {
     protected Texture texture;
     protected TextureRegion textureRegion;
@@ -62,7 +64,6 @@ public class Entity extends Actor {
         if (angle < 0) {
             angle += 360;
         }
-        System.out.println("Angulo: " + angle);
 
         for (EventListener ob : listeners) {
             this.removeListener(ob);
@@ -76,7 +77,17 @@ public class Entity extends Actor {
         disableMovement(false);
         body.applyLinearImpulse(new Vector2((x - getX()) / 10, (y - getY()) / 10), new Vector2(x, y), true);
         velocity = (x - getX());
-        System.out.println("Velocidad: " + velocity);
+
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    this.sleep(1500);
+                } catch (Exception e) {
+                }
+                GameScreen.player.nextBird();
+            }
+        }.start();
     }
 
     public Body getBody() {
@@ -99,9 +110,12 @@ public class Entity extends Actor {
         return velocity;
     }
 
-    public void removeVelocity(float velocity) {
+    public void removeVelocity(float velocity, boolean blockRoto) {
         this.velocity -= velocity;
         if (this.velocity < 0) this.velocity = 0;
-        body.applyForceToCenter(-velocity * 5, 0f, true);
+        if (!blockRoto) {
+            this.velocity = this.velocity / 50;
+        }
+        body.applyForceToCenter(-this.velocity * 5, 0f, true);
     }
 }

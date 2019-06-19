@@ -32,7 +32,7 @@ public class GameScreen extends Pantalla {
 
     private FrameRate rate;
 
-    private Player player;
+    public static Player player;
 
     private int zoom = 3;
 
@@ -109,7 +109,7 @@ public class GameScreen extends Pantalla {
 
         if (Gdx.input.justTouched() && player.isPlaying()) {
             player.clickAire();
-            System.out.println("Cursor: " + Gdx.input.getX() / Constants.PIXELS_IN_METER + " (" + Gdx.input.getX() + "), " + Gdx.input.getY() / Constants.PIXELS_IN_METER);
+            //System.out.println("Cursor: " + Gdx.input.getX() / Constants.PIXELS_IN_METER + " (" + Gdx.input.getX() + "), " + Gdx.input.getY() / Constants.PIXELS_IN_METER);
         }
     }
 

@@ -22,6 +22,7 @@ public interface Level {
     void generateBirds(Stage stage, World world);
     Bird nextBird();
     Bird getBirdByBody(Body b);
-
     Material getMaterialByBody(Body b);
+
+    Enemy getEnemyByBody(Body b);
 }

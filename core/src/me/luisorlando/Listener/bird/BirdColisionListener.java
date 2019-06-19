@@ -1,20 +1,27 @@
 package me.luisorlando.Listener.bird;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.luisorlando.entity.Entity;
 import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.entity.birds.BirdType;
+import me.luisorlando.entity.enemys.Enemy;
 import me.luisorlando.levels.Level;
 import me.luisorlando.materials.Material;
 import me.luisorlando.materials.MaterialType;
 import me.luisorlando.player.Player;
 
 public class BirdColisionListener implements ContactListener {
+
+    public static List<Body> bodyEliminator = new ArrayList<Body>();
 
     private Player player;
     private Level nivel;
@@ -45,45 +52,54 @@ public class BirdColisionListener implements ContactListener {
 
                 if (b.getType() == BirdType.RED) {
                     if (material.getType() == MaterialType.WOOD) {
-                        ((Entity) b).removeVelocity(400f);
+                        ((Entity) b).removeVelocity(400f, romperMaterial);
                     } else if (material.getType() == MaterialType.STONE) {
-                        ((Entity) b).removeVelocity(600f);
+                        ((Entity) b).removeVelocity(600f, romperMaterial);
                     } else if (material.getType() == MaterialType.GLASS) {
-                        ((Entity) b).removeVelocity(400f);
+                        ((Entity) b).removeVelocity(400f, romperMaterial);
                     }
                 } else if (b.getType() == BirdType.YELLOW) {
                     if (material.getType() == MaterialType.WOOD) {
-                        ((Entity) b).removeVelocity(200f);
+                        ((Entity) b).removeVelocity(200f, romperMaterial);
                     } else if (material.getType() == MaterialType.STONE) {
-                        ((Entity) b).removeVelocity(800f);
+                        ((Entity) b).removeVelocity(800f, romperMaterial);
                     } else if (material.getType() == MaterialType.GLASS) {
-                        ((Entity) b).removeVelocity(600f);
+                        ((Entity) b).removeVelocity(600f, romperMaterial);
                     }
                 } else if (b.getType() == BirdType.WHITE) {
                     if (material.getType() == MaterialType.WOOD) {
-                        ((Entity) b).removeVelocity(800f);
+                        ((Entity) b).removeVelocity(800f, romperMaterial);
                     } else if (material.getType() == MaterialType.STONE) {
-                        ((Entity) b).removeVelocity(800f);
+                        ((Entity) b).removeVelocity(800f, romperMaterial);
                     } else if (material.getType() == MaterialType.GLASS) {
-                        ((Entity) b).removeVelocity(800f);
+                        ((Entity) b).removeVelocity(800f, romperMaterial);
                     }
                 }
-
-                new Thread() {
-                    @Override
-                    public void run() {
-                        if (romperMaterial) {
-                            material.eliminar(player.getWorld());
-                        }
-                        player.nextBird();
-                    }
-                }.start();
             }
         }
+        if ((fixtureA.getUserData().toString().contains("ENEMY") && fixtureB.getUserData().toString().contains("BIRD"))
+                || (fixtureB.getUserData().toString().contains("BIRD") && fixtureA.getUserData().toString().contains("ENEMY"))) {
+            Enemy e = nivel.getEnemyByBody(fixtureA.getUserData().toString().contains("ENEMY") ? fixtureA : fixtureB);
+            e.dañar(player.getWorld());
+        }
+
+
+        Gdx.app.postRunnable(new Runnable() {
+            @Override
+            public void run() {
+                for (Body b : BirdColisionListener.bodyEliminator) {
+                    try {
+                        b.setTransform(-10f, 0f, 0f);
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        });
     }
 
     @Override
     public void endContact(Contact contact) {
+
     }
 
     @Override

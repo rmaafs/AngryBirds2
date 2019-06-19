@@ -19,14 +19,15 @@ public class EnemyCreator extends Enemy {
         this.type = type;
         if (type == EnemyType.NORMAL) {
             texture = Main.manager.get("enemigos/normal.png");
-            vida = 50f;
+            vida = 1f;
         } else if (type == EnemyType.CASCO) {
             texture = Main.manager.get("enemigos/casco.png");
-            vida = 200f;
+            vida = 3f;
         } else if (type == EnemyType.BIGOTE) {
             texture = Main.manager.get("enemigos/bigote.png");
-            vida = 100f;
+            vida = 2f;
         }
+        initialVida = vida;
 
         createBox(world, stage, position);
     }

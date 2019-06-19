@@ -4,11 +4,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import me.luisorlando.Constants;
+
+import static me.luisorlando.Listener.bird.BirdColisionListener.bodyEliminator;
 
 public class Material extends Actor{
 
@@ -42,24 +43,20 @@ public class Material extends Actor{
 
         final int fframe = frame;
 
-        new Thread() {
-            @Override
-            public void run() {
-                if (boxType == BoxType.BOX) {
-                    textureRegion = new TextureRegion(texture, 85 * fframe, 85, 84, 84);
-                } else {
-                    textureRegion = new TextureRegion(texture, 0, 20 * fframe, 203, 20);
-                }
-            }
-        }.start();
-
-        System.out.println("FRAME: " + frame);
+        if (boxType == BoxType.BOX) {
+            textureRegion = new TextureRegion(texture, 85 * fframe, 85, 84, 84);
+        } else {
+            textureRegion = new TextureRegion(texture, 0, 20 * fframe, 203, 20);
+        }
+        if (durability == 0) {
+            eliminar();
+        }
 
         return durability == 0;
     }
 
-    public void eliminar(World world) {
-        world.destroyBody(body);
+    public void eliminar() {
+        bodyEliminator.add(body);
         this.remove();
         this.setVisible(false);
     }
