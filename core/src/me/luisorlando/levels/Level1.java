@@ -94,6 +94,20 @@ public class Level1 implements Level {
         enemigos.remove(b);
     }
 
+    public int getPuntosPajarosRestantes() {
+        int contador = 0;
+        for (Bird bird : pajaros) {
+            if (bird instanceof BirdRed) {
+                contador += 500;
+            } else if (bird instanceof BirdYellow) {
+                contador += 700;
+            } else if (bird instanceof BirdWhite) {
+                contador += 900;
+            }
+        }
+        return contador;
+    }
+
     public Bird getBirdByBody(Body b) {
         for (Bird bird : pajaros) {
             if (b == ((Entity) bird).getBody()) {

@@ -23,14 +23,11 @@ public interface Level {
     Bird nextBird();
     Bird getBirdByBody(Body b);
     Material getMaterialByBody(Body b);
-
     Enemy getEnemyByBody(Body b);
-
     boolean sinEnemigos();
-
     boolean sinPajaros();
-
     void eliminarBird(Bird b);
-
     void eliminarEnemigo(Enemy b);
+
+    int getPuntosPajarosRestantes();
 }

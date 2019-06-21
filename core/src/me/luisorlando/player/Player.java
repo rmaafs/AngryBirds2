@@ -11,6 +11,7 @@ import me.luisorlando.entity.Entity;
 import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.levels.Level;
 import me.luisorlando.levels.Level1;
+import me.luisorlando.screen.GameScreen;
 
 public class Player {
     private List<Entity> birds;
@@ -97,6 +98,7 @@ public class Player {
                     Thread.sleep(3000);
                 } catch (Exception e) {
                 }
+                GameScreen.player.addPuntos(nivel.getPuntosPajarosRestantes());
                 System.out.println("Juego ganado.");
             }
         }.start();
