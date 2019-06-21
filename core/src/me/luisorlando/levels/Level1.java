@@ -87,6 +87,7 @@ public class Level1 implements Level {
 
     public void eliminarBird(Bird b) {
         pajaros.remove(b);
+        currentBird--;
     }
 
     public void eliminarEnemigo(Enemy b) {

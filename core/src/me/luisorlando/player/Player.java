@@ -18,6 +18,7 @@ public class Player {
     private int currentNivel = 1;
     private boolean playing = false;
     private int puntos = 0;
+    private boolean cambiandoNivel = false;
 
     private World world;
     private Stage stage;
@@ -60,14 +61,45 @@ public class Player {
         resortera.play(stage);
         nextBird();
         playing = true;
+        cambiandoNivel = false;
     }
 
     public void comprobarJuegoTerminado() {
-        if (nivel.sinPajaros()) {
-            System.out.println("Juego perdido.");
-        } else if (nivel.sinEnemigos()) {
-            System.out.println("Juego ganado.");
+        if (!cambiandoNivel) {
+            if (nivel.sinPajaros()) {
+                gameOver();
+            } else if (nivel.sinEnemigos()) {
+                gameWin();
+            }
         }
+    }
+
+    private void gameOver() {
+        cambiandoNivel = true;
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                }
+                System.out.println("Juego perdido.");
+            }
+        }.start();
+    }
+
+    private void gameWin() {
+        cambiandoNivel = true;
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                }
+                System.out.println("Juego ganado.");
+            }
+        }.start();
     }
 
     public void restartPuntos() {
