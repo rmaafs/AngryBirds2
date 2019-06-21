@@ -17,6 +17,7 @@ public class Player {
     private Level nivel;
     private int currentNivel = 1;
     private boolean playing = false;
+    private int puntos = 0;
 
     private World world;
     private Stage stage;
@@ -67,6 +68,18 @@ public class Player {
         } else if (nivel.sinEnemigos()) {
             System.out.println("Juego ganado.");
         }
+    }
+
+    public void restartPuntos() {
+        puntos = 0;
+    }
+
+    public void addPuntos(int puntos) {
+        this.puntos += puntos;
+    }
+
+    public int getPuntos() {
+        return puntos;
     }
 
     public void clickAire() {

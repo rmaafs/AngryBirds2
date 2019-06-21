@@ -45,6 +45,14 @@ public class Enemy extends Entity {
         this.remove();
         this.setVisible(false);
         GameScreen.player.getNivel().eliminarEnemigo(this);
+
+        if (type == EnemyType.NORMAL) {
+            GameScreen.player.addPuntos(50);
+        } else if (type == EnemyType.CASCO) {
+            GameScreen.player.addPuntos(200);
+        } else if (type == EnemyType.BIGOTE) {
+            GameScreen.player.addPuntos(100);
+        }
     }
 
     @Override

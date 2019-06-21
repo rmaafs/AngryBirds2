@@ -111,11 +111,8 @@ public class Entity extends Actor {
                     } catch (Exception e) {
                     }
 
-                    System.out.println("Ciclando");
-
                     if ((huevo && (soltoHuevo && body.getPosition().y > Gdx.graphics.getHeight())) || ((prex - 10 < body.getPosition().x && prex + 10 > body.getPosition().x)
                             && (prey - 10 < body.getPosition().y && prey + 10 > body.getPosition().y))) {
-                        System.out.println("Eliminar");
                         eliminar();
                         break;
                     }

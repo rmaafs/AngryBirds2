@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import me.luisorlando.Constants;
+import me.luisorlando.screen.GameScreen;
 
 import static me.luisorlando.Listener.bird.BirdColisionListener.bodyEliminator;
 
@@ -59,6 +60,24 @@ public class Material extends Actor{
         bodyEliminator.add(body);
         this.remove();
         this.setVisible(false);
+
+        if (boxType == BoxType.STICK) {
+            if (type == MaterialType.WOOD) {
+                GameScreen.player.addPuntos(10);
+            } else if (type == MaterialType.STONE) {
+                GameScreen.player.addPuntos(50);
+            } else if (type == MaterialType.GLASS) {
+                GameScreen.player.addPuntos(20);
+            }
+        } else if (boxType == BoxType.BOX) {
+            if (type == MaterialType.WOOD) {
+                GameScreen.player.addPuntos(50);
+            } else if (type == MaterialType.STONE) {
+                GameScreen.player.addPuntos(90);
+            } else if (type == MaterialType.GLASS) {
+                GameScreen.player.addPuntos(70);
+            }
+        }
     }
 
     @Override

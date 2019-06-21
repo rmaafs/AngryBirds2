@@ -17,6 +17,7 @@ import me.luisorlando.materials.BoxType;
 import me.luisorlando.materials.Material;
 import me.luisorlando.materials.MaterialCreator;
 import me.luisorlando.materials.MaterialType;
+import me.luisorlando.screen.GameScreen;
 
 public class Level1 implements Level {
 
@@ -35,6 +36,7 @@ public class Level1 implements Level {
         for (Bird m : pajaros) {
             m.startDraw();
         }
+        GameScreen.player.restartPuntos();
     }
 
     public Bird nextBird() {
