@@ -42,7 +42,7 @@ public class BirdColisionListener implements ContactListener {
             final Bird b = nivel.getBirdByBody(fixtureA.getUserData().toString().contains("BIRD") ? fixtureA : fixtureB);
             final Material material = nivel.getMaterialByBody(fixtureA.getUserData().toString().contains("MATERIAL") ? fixtureA : fixtureB);
 
-            if (((Entity) b).isFirstColission()) {
+            if (b != null && ((Entity) b).isFirstColission()) {
                 b.setTextureDañado();
                 final boolean romperMaterial = material.dañar(((Entity) b).getVelocity());
                 if (romperMaterial) {
@@ -78,23 +78,39 @@ public class BirdColisionListener implements ContactListener {
             }
         }
         if ((fixtureA.getUserData().toString().contains("ENEMY") && fixtureB.getUserData().toString().contains("BIRD"))
-                || (fixtureB.getUserData().toString().contains("BIRD") && fixtureA.getUserData().toString().contains("ENEMY"))) {
+                || (fixtureB.getUserData().toString().contains("ENEMY") && fixtureA.getUserData().toString().contains("BIRD"))) {
             Enemy e = nivel.getEnemyByBody(fixtureA.getUserData().toString().contains("ENEMY") ? fixtureA : fixtureB);
-            e.dañar(player.getWorld());
+            if (e != null) {
+                Bird b = nivel.getBirdByBody(fixtureA.getUserData().toString().contains("BIRD") ? fixtureA : fixtureB);
+                e.dañar();
+
+                if (((Entity) b).isFirstColission()) {
+                    b.setTextureDañado();
+                }
+            }
+        }
+        if ((fixtureA.getUserData().toString().contains("ENEMY") && fixtureB.getUserData().toString().contains("MATERIAL"))
+                || (fixtureB.getUserData().toString().contains("ENEMY") && fixtureA.getUserData().toString().contains("MATERIAL"))) {
+            Enemy e = nivel.getEnemyByBody(fixtureA.getUserData().toString().contains("ENEMY") ? fixtureA : fixtureB);
+            if (e != null) {
+                e.dañar();
+            }
         }
 
 
-        Gdx.app.postRunnable(new Runnable() {
-            @Override
-            public void run() {
-                for (Body b : BirdColisionListener.bodyEliminator) {
-                    try {
-                        b.setTransform(-10f, 0f, 0f);
-                    } catch (Exception e) {
+        if (!bodyEliminator.isEmpty()) {
+            Gdx.app.postRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    for (Body b : BirdColisionListener.bodyEliminator) {
+                        try {
+                            b.setTransform(-10f, 0f, 0f);
+                        } catch (Exception e) {
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package me.luisorlando.entity;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -13,7 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.luisorlando.entity.birds.Bird;
+import me.luisorlando.entity.birds.BirdWhite;
 import me.luisorlando.screen.GameScreen;
+
+import static me.luisorlando.Listener.bird.BirdColisionListener.bodyEliminator;
 
 public class Entity extends Actor {
     protected Texture texture;
@@ -21,7 +26,7 @@ public class Entity extends Actor {
     protected Stage stage;
     protected Body body;
     protected int size = 1;
-    protected float x = 0, y = 0, velocity = 0f;
+    protected float x = 0, y = 0, velocity = 0f, prex, prey;
     protected boolean followMouse = false;
     protected boolean firstColission = true;
     protected boolean flying = false;
@@ -86,8 +91,47 @@ public class Entity extends Actor {
                 } catch (Exception e) {
                 }
                 GameScreen.player.nextBird();
+                prex = body.getPosition().x;
+                prey = body.getPosition().y;
+                contadorEliminar();
             }
         }.start();
+    }
+
+    public void contadorEliminar() {
+        final boolean huevo = ((Bird) this) instanceof BirdWhite;
+        final boolean soltoHuevo = huevo ? ((BirdWhite) this).isSoltoHuevo() : false;
+        new Thread() {
+
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        this.sleep(3000);
+                    } catch (Exception e) {
+                    }
+
+                    System.out.println("Ciclando");
+
+                    if ((huevo && (soltoHuevo && body.getPosition().y > Gdx.graphics.getHeight())) || ((prex - 10 < body.getPosition().x && prex + 10 > body.getPosition().x)
+                            && (prey - 10 < body.getPosition().y && prey + 10 > body.getPosition().y))) {
+                        System.out.println("Eliminar");
+                        eliminar();
+                        break;
+                    }
+
+                    prex = body.getPosition().x;
+                    prey = body.getPosition().y;
+                }
+            }
+        }.start();
+    }
+
+    public void eliminar() {
+        bodyEliminator.add(body);
+        this.remove();
+        this.setVisible(false);
+        GameScreen.player.getNivel().eliminarBird(((Bird) this));
     }
 
     public Body getBody() {

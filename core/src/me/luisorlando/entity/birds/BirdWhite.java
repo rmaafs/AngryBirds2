@@ -91,6 +91,10 @@ public class BirdWhite extends Entity implements Bird {
         soltoHuevo = true;
     }
 
+    public boolean isSoltoHuevo() {
+        return soltoHuevo;
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (followMouse) {

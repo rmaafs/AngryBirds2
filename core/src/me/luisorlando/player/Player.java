@@ -40,11 +40,9 @@ public class Player {
     }
 
     public void nextBird() {
-        if (resortera.getCurrentBird() == null || !((Entity) (resortera.getCurrentBird())).isFlying()) {
-            Bird b = nivel.nextBird();
-            if (b != null) {
-                resortera.ponerBird(b);
-            }
+        Bird b = nivel.nextBird();
+        if (b != null) {
+            resortera.ponerBird(b);
         }
     }
 
@@ -61,6 +59,14 @@ public class Player {
         resortera.play(stage);
         nextBird();
         playing = true;
+    }
+
+    public void comprobarJuegoTerminado() {
+        if (nivel.sinPajaros()) {
+            System.out.println("Juego perdido.");
+        } else if (nivel.sinEnemigos()) {
+            System.out.println("Juego ganado.");
+        }
     }
 
     public void clickAire() {

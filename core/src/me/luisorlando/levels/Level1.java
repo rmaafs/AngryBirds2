@@ -45,8 +45,6 @@ public class Level1 implements Level {
     }
 
     public void generate(Stage stage, World world){
-        //materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(30, 15)));
-
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.STICK, stage, world, new Vector2(43, floor)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.STICK, stage, world, new Vector2(35, floor)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.STICK, stage, world, new Vector2(27, floor)));
@@ -75,6 +73,22 @@ public class Level1 implements Level {
         pajaros.add(new BirdRed(stage, world, new Vector2(x -= 2f, floor)));
         pajaros.add(new BirdYellow(stage, world, new Vector2(x -= 1.5, floor)));
         pajaros.add(new BirdWhite(stage, world, new Vector2(x -= 2, floor)));
+    }
+
+    public boolean sinEnemigos() {
+        return enemigos.isEmpty();
+    }
+
+    public boolean sinPajaros() {
+        return pajaros.isEmpty();
+    }
+
+    public void eliminarBird(Bird b) {
+        pajaros.remove(b);
+    }
+
+    public void eliminarEnemigo(Enemy b) {
+        enemigos.remove(b);
     }
 
     public Bird getBirdByBody(Body b) {

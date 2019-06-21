@@ -100,6 +100,8 @@ public class GameScreen extends Pantalla {
             camera.position.y = stage.getCamera().position.y / Constants.PIXELS_IN_METER;
             renderer.render(world, camera.combined);
         }
+
+        player.comprobarJuegoTerminado();
     }
 
     private void checkTeclas() {
