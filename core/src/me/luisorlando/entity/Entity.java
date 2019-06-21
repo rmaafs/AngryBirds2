@@ -1,7 +1,6 @@
 package me.luisorlando.entity;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -111,7 +110,7 @@ public class Entity extends Actor {
                     } catch (Exception e) {
                     }
 
-                    if ((huevo && (soltoHuevo && body.getPosition().y > Gdx.graphics.getHeight())) || ((prex - 10 < body.getPosition().x && prex + 10 > body.getPosition().x)
+                    if ((huevo && (soltoHuevo && body.getPosition().y > 100)) || ((prex - 10 < body.getPosition().x && prex + 10 > body.getPosition().x)
                             && (prey - 10 < body.getPosition().y && prey + 10 > body.getPosition().y))) {
                         eliminar();
                         break;

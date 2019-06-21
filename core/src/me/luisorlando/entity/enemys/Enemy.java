@@ -19,7 +19,11 @@ public class Enemy extends Entity {
     }
 
     public void dañar() {
-        if (vida - 1 >= 0) vida--;
+        dañar(1f);
+    }
+
+    public void dañar(float cantidad) {
+        if (vida - 1 >= 0) vida -= cantidad;
         int frame = 0;
 
         if (vida <= initialVida / 2) {

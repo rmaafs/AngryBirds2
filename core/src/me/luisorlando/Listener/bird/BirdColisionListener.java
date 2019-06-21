@@ -39,12 +39,12 @@ public class BirdColisionListener implements ContactListener {
         if ((fixtureA.getUserData().toString().contains("BIRD") && fixtureB.getUserData().toString().contains("MATERIAL"))
                 || (fixtureB.getUserData().toString().contains("BIRD") && fixtureA.getUserData().toString().contains("MATERIAL"))) {
 
-            final Bird b = nivel.getBirdByBody(fixtureA.getUserData().toString().contains("BIRD") ? fixtureA : fixtureB);
-            final Material material = nivel.getMaterialByBody(fixtureA.getUserData().toString().contains("MATERIAL") ? fixtureA : fixtureB);
+            Bird b = nivel.getBirdByBody(fixtureA.getUserData().toString().contains("BIRD") ? fixtureA : fixtureB);
+            Material material = nivel.getMaterialByBody(fixtureA.getUserData().toString().contains("MATERIAL") ? fixtureA : fixtureB);
 
             if (b != null && ((Entity) b).isFirstColission()) {
                 b.setTextureDañado();
-                final boolean romperMaterial = material.dañar(((Entity) b).getVelocity());
+                boolean romperMaterial = material.dañar(((Entity) b).getVelocity());
                 if (romperMaterial) {
                     contact.setEnabled(false);
                     ((Entity) b).setFirstColission(true);
@@ -94,6 +94,21 @@ public class BirdColisionListener implements ContactListener {
             Enemy e = nivel.getEnemyByBody(fixtureA.getUserData().toString().contains("ENEMY") ? fixtureA : fixtureB);
             if (e != null) {
                 e.dañar();
+            }
+        }
+        if ((fixtureA.getUserData().toString().contains("HUEVO") || fixtureB.getUserData().toString().contains("HUEVO"))) {
+            if ((fixtureA.getUserData().toString().contains("ENEMY") || fixtureB.getUserData().toString().contains("ENEMY"))) {
+                Enemy e = nivel.getEnemyByBody(fixtureA.getUserData().toString().contains("ENEMY") ? fixtureA : fixtureB);
+                if (e != null) {
+                    e.dañar(5f);
+                }
+            }
+            if ((fixtureA.getUserData().toString().contains("MATERIAL") || fixtureB.getUserData().toString().contains("MATERIAL"))) {
+                Material material = nivel.getMaterialByBody(fixtureA.getUserData().toString().contains("MATERIAL") ? fixtureA : fixtureB);
+                boolean romperMaterial = material.dañar(100);
+                if (romperMaterial) {
+                    contact.setEnabled(false);
+                }
             }
         }
 
