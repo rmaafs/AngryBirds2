@@ -28,6 +28,5 @@ public interface Level {
     boolean sinPajaros();
     void eliminarBird(Bird b);
     void eliminarEnemigo(Enemy b);
-
     int getPuntosPajarosRestantes();
 }
