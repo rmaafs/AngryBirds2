@@ -50,7 +50,7 @@ public class BirdYellow extends Entity implements Bird {
 
         def = new BodyDef();
         def.position.set(position);
-        def.type = BodyDef.BodyType.DynamicBody;
+        def.type = BodyDef.BodyType.StaticBody;
 
         CircleShape circle = new CircleShape();
         circle.setRadius(0.7f);

@@ -105,10 +105,27 @@ public class BirdColisionListener implements ContactListener {
             }
             if ((fixtureA.getUserData().toString().contains("MATERIAL") || fixtureB.getUserData().toString().contains("MATERIAL"))) {
                 Material material = nivel.getMaterialByBody(fixtureA.getUserData().toString().contains("MATERIAL") ? fixtureA : fixtureB);
-                boolean romperMaterial = material.dañar(100);
-                if (romperMaterial) {
-                    contact.setEnabled(false);
+                if (material != null) {
+                    boolean romperMaterial = material.dañar(100);
+                    if (romperMaterial) {
+                        contact.setEnabled(false);
+                    }
                 }
+            }
+        }
+        if ((fixtureA.getUserData().toString().contains("FLOOR") && fixtureB.getUserData().toString().contains("BIRD"))
+                || (fixtureB.getUserData().toString().contains("FLOOR") && fixtureA.getUserData().toString().contains("BIRD"))) {
+            Bird b = nivel.getBirdByBody(fixtureA.getUserData().toString().contains("BIRD") ? fixtureA : fixtureB);
+            if (b != null && ((Entity) b).isFirstColission()) {
+                b.setTextureDañado();
+                ((Entity) b).setFirstColission(true);
+            }
+        }
+        if ((fixtureA.getUserData().toString().contains("ENEMY") && fixtureB.getUserData().toString().contains("FLOOR"))
+                || (fixtureB.getUserData().toString().contains("ENEMY") && fixtureA.getUserData().toString().contains("FLOOR"))) {
+            Enemy e = nivel.getEnemyByBody(fixtureA.getUserData().toString().contains("ENEMY") ? fixtureA : fixtureB);
+            if (e != null) {
+                e.dañar(2);
             }
         }
 
