@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import me.luisorlando.Constants;
 import me.luisorlando.Main;
+import me.luisorlando.menus.BotonCirculo;
 import me.luisorlando.menus.IntroPlay;
 
 import static me.luisorlando.Main.inputs;
@@ -24,6 +25,7 @@ public class IntroScreen extends Pantalla {
     private Box2DDebugRenderer renderer;
     private OrthographicCamera camera;
     private IntroPlay btnPlay;
+    private BotonCirculo btnSalir;
 
     private Texture texture;
 
@@ -35,7 +37,15 @@ public class IntroScreen extends Pantalla {
         stage.setDebugAll(false);
         inputs.addProcessor(stage);
         world = new World(new Vector2(0, -40), true);
-        btnPlay = new IntroPlay(stage);
+
+        btnPlay = new IntroPlay(world, stage, new Vector2(25, 15));
+
+        btnSalir = new BotonCirculo("menus/botones/salir.png", world, stage, new Vector2(2, 2)) {
+            @Override
+            public void onclick() {
+                Gdx.app.exit();
+            }
+        };
 
         texture = getRecurso("fondo.png");
 
@@ -43,7 +53,6 @@ public class IntroScreen extends Pantalla {
             renderer = new Box2DDebugRenderer();
             camera = new OrthographicCamera(stage.getWidth() / Constants.PIXELS_IN_METER, stage.getHeight() / Constants.PIXELS_IN_METER);
         }
-
 
         world.setGravity(new Vector2(0, -9.81f));
     }
@@ -57,9 +66,6 @@ public class IntroScreen extends Pantalla {
     public void render(float delta) {
         Gdx.gl.glClearColor(0.4f, 0.5f, 0.8f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        checkTeclas();
-
 
         stage.getCamera().update();
 
@@ -77,17 +83,11 @@ public class IntroScreen extends Pantalla {
             camera.position.y = stage.getCamera().position.y / Constants.PIXELS_IN_METER;
             renderer.render(world, camera.combined);
         }
-    }
 
-    private void checkTeclas() {
-        /*if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
-            player.nextBird();
+        if (btnPlay.clickeoJugar) {
+            this.dispose();
+            game.openLevelSelector();
         }
-
-        if (Gdx.input.justTouched() && player.isPlaying()) {
-            player.clickAire();
-            //System.out.println("Cursor: " + Gdx.input.getX() / Constants.PIXELS_IN_METER + " (" + Gdx.input.getX() + "), " + Gdx.input.getY() / Constants.PIXELS_IN_METER);
-        }*/
     }
 
     @Override

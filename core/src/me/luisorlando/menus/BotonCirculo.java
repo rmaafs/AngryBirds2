@@ -5,8 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,19 +19,18 @@ import me.luisorlando.Main;
 
 import static me.luisorlando.Constants.PIXELS_IN_METER;
 
-public class IntroPlay extends Actor {
-
+public class BotonCirculo extends Actor implements BotonClickeable {
     private Texture texture;
-    public boolean clickeoJugar = false;
-    private Stage stage;
     private World world;
+    private Stage stage;
     private Body body;
-    private int size = 5;
 
-    public IntroPlay(World world, Stage stage, Vector2 position) {
+    private int size = 3;
+
+    public BotonCirculo(String path, World world, Stage stage, Vector2 position) {
         this.world = world;
         this.stage = stage;
-        texture = Main.manager.get("menus/botones/play.png");
+        texture = Main.manager.get(path);
         createBox(position);
         stage.addActor(this);
         registrarEventos();
@@ -39,33 +39,36 @@ public class IntroPlay extends Actor {
     private void registrarEventos() {
         this.addListener(new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                clickeoJugar = true;
+                onclick();
                 return true;
             }
         });
     }
 
+    public void onclick() {
+    }
+
     private void createBox(Vector2 position) {
-        this.stage = stage;
         Fixture fixture;
         BodyDef def;
-        PolygonShape shape;
 
         def = new BodyDef();
         def.position.set(position);
         def.type = BodyDef.BodyType.StaticBody;
-        shape = new PolygonShape();
 
-        shape.setAsBox(size * 2, size);
-        setSize(PIXELS_IN_METER * size * 3, PIXELS_IN_METER * size * 2);
+        CircleShape circle = new CircleShape();
+        circle.setRadius(1.5f);
+        setSize(PIXELS_IN_METER * size, PIXELS_IN_METER * size);
 
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = circle;
         body = world.createBody(def);
-        fixture = body.createFixture(shape, 1);
+        fixture = body.createFixture(fixtureDef);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        setPosition((body.getPosition().x - 3f) * Constants.PIXELS_IN_METER - texture.getWidth(), (body.getPosition().y - 2f) * Constants.PIXELS_IN_METER - texture.getHeight());
+        setPosition((body.getPosition().x) * Constants.PIXELS_IN_METER - texture.getWidth(), (body.getPosition().y) * Constants.PIXELS_IN_METER - texture.getHeight());
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 }

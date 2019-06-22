@@ -10,7 +10,6 @@ import java.util.List;
 import me.luisorlando.entity.Entity;
 import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.levels.Level;
-import me.luisorlando.levels.Level1;
 import me.luisorlando.screen.GameScreen;
 
 public class Player {
@@ -26,18 +25,14 @@ public class Player {
 
     private Resortera resortera;
 
-    public Player(World world, Stage stage){
+    public Player(World world, Stage stage, Level level) {
         this.world = world;
         this.stage = stage;
 
         birds = new ArrayList<Entity>();
         resortera = new Resortera(new Vector2(500, 400));
 
-        switch (currentNivel){
-            case 1:
-                nivel = new Level1();
-                break;
-        }
+        nivel = level;
 
         generateLevel();
     }
@@ -63,6 +58,11 @@ public class Player {
         nextBird();
         playing = true;
         cambiandoNivel = false;
+    }
+
+    public void restartLevel() {
+        generateLevel();
+        play();
     }
 
     public void comprobarJuegoTerminado() {

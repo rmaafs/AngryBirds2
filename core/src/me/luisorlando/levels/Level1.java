@@ -5,6 +5,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.luisorlando.entity.Entity;
 import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.entity.birds.BirdRed;
@@ -21,8 +24,17 @@ import me.luisorlando.screen.GameScreen;
 
 public class Level1 implements Level {
 
+    private List<Material> materiales;
+    private List<Enemy> enemigos;
+    private List<Bird> pajaros;
     private float floor = 7.35f;
     private int currentBird = 0;
+
+    public Level1() {
+        materiales = new ArrayList<Material>();
+        enemigos = new ArrayList<Enemy>();
+        pajaros = new ArrayList<Bird>();
+    }
 
     public void play(){
         for (Material m : materiales){
@@ -51,10 +63,10 @@ public class Level1 implements Level {
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.STICK, stage, world, new Vector2(35, floor)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.STICK, stage, world, new Vector2(27, floor)));
 
-        /*materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 2)));
+        materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 2)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 4)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 6)));
-        materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 8)));*/
+        materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(27, floor + 8)));
 
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 2)));
         materiales.add(new MaterialCreator(MaterialType.WOOD, BoxType.BOX, stage, world, new Vector2(43, floor + 4)));
