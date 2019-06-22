@@ -5,7 +5,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
-import me.luisorlando.screen.GameScreen;
+import me.luisorlando.screen.IntroScreen;
 
 public class Main extends Game {
 	public static InputMultiplexer inputs = new InputMultiplexer();
@@ -30,9 +30,12 @@ public class Main extends Game {
         manager.load("enemigos/casco.png", Texture.class);
         manager.load("enemigos/bigote.png", Texture.class);
 
+        manager.load("menus/botones/play.png", Texture.class);
+
 
 		manager.finishLoading();
-		setScreen(new GameScreen(this));
+        setScreen(new IntroScreen(this));
+        //setScreen(new GameScreen(this));
 	}
 
 	public AssetManager getManager() {
