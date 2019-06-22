@@ -13,6 +13,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.luisorlando.Constants;
 import me.luisorlando.Main;
 import me.luisorlando.levels.Level1;
+import me.luisorlando.levels.Level2;
+import me.luisorlando.levels.Level3;
+import me.luisorlando.levels.Level4;
+import me.luisorlando.levels.Level5;
+import me.luisorlando.levels.Level6;
 import me.luisorlando.menus.BotonLevel;
 
 import static me.luisorlando.Main.inputs;
@@ -49,35 +54,35 @@ public class LevelSelectorScreen extends Pantalla {
         btnLevel2 = new BotonLevel("menus/botones/level.png", 2, world, stage, new Vector2(11, 27), 0.5f, -0.1f) {
             @Override
             public void onclick() {
-                System.out.println("JE");
+                game.openGame(new Level2());
             }
         };
 
         btnLevel3 = new BotonLevel("menus/botones/level.png", 3, world, stage, new Vector2(17, 27), 0.2f, -0.3f) {
             @Override
             public void onclick() {
-                System.out.println("JE");
+                game.openGame(new Level3());
             }
         };
 
         btnLevel4 = new BotonLevel("menus/botones/level.png", 4, world, stage, new Vector2(24, 27), 0.65f, 0.2f) {
             @Override
             public void onclick() {
-                System.out.println("JE");
+                game.openGame(new Level4());
             }
         };
 
         btnLevel5 = new BotonLevel("menus/botones/level.png", 5, world, stage, new Vector2(30, 27), 0.3f, -0.1f) {
             @Override
             public void onclick() {
-                System.out.println("JE");
+                game.openGame(new Level5());
             }
         };
 
         btnLevel6 = new BotonLevel("menus/botones/level.png", 6, world, stage, new Vector2(37, 27), 0.9f, 0.3f) {
             @Override
             public void onclick() {
-                System.out.println("JE");
+                game.openGame(new Level6());
             }
         };
 
