@@ -6,10 +6,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import me.luisorlando.Constants;
 import me.luisorlando.Listener.bird.BirdColisionListener;
@@ -35,11 +40,13 @@ public class GameScreen extends Pantalla {
     private FrameRate rate;
 
     public static Player player;
+    public static List<Thread> hilos;
 
     private int zoom = 3;
 
     public GameScreen(final Main game, final Level level) {
         super(game);
+        hilos = new ArrayList<Thread>();
         stage = new Stage(new FitViewport(1024 * zoom, 640 * zoom));
         stage.setDebugAll(false);
         inputs.addProcessor(stage);
@@ -131,8 +138,21 @@ public class GameScreen extends Pantalla {
 
     @Override
     public void dispose() {
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+        for (int i = 0; i < bodies.size; i++) {
+            world.destroyBody(bodies.get(i));
+        }
+
         stage.dispose();
         world.dispose();
+        for (Thread t : hilos) {
+            t.stop();
+        }
+        hilos = null;
         if (debugBox2d) renderer.dispose();
+        player = null;
+        world = null;
+        stage = null;
     }
 }

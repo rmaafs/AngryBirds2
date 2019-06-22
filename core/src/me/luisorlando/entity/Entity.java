@@ -18,6 +18,7 @@ import me.luisorlando.entity.birds.BirdWhite;
 import me.luisorlando.screen.GameScreen;
 
 import static me.luisorlando.Listener.bird.BirdColisionListener.bodyEliminator;
+import static me.luisorlando.screen.GameScreen.hilos;
 
 public class Entity extends Actor {
     protected Texture texture;
@@ -82,7 +83,8 @@ public class Entity extends Actor {
         body.applyLinearImpulse(new Vector2((x - getX()) / 10, (y - getY()) / 10), new Vector2(x, y), true);
         velocity = (x - getX());
 
-        new Thread() {
+
+        Thread t = new Thread() {
             @Override
             public void run() {
                 try {
@@ -93,14 +95,17 @@ public class Entity extends Actor {
                 prex = body.getPosition().x;
                 prey = body.getPosition().y;
                 contadorEliminar();
+                System.out.println("PING");
             }
-        }.start();
+        };
+        t.start();
+        hilos.add(t);
     }
 
     public void contadorEliminar() {
         final boolean huevo = ((Bird) this) instanceof BirdWhite;
         final boolean soltoHuevo = huevo ? ((BirdWhite) this).isSoltoHuevo() : false;
-        new Thread() {
+        Thread t = new Thread() {
 
             @Override
             public void run() {
@@ -120,7 +125,9 @@ public class Entity extends Actor {
                     prey = body.getPosition().y;
                 }
             }
-        }.start();
+        };
+        t.start();
+        hilos.add(t);
     }
 
     public void eliminar() {

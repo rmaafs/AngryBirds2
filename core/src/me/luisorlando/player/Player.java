@@ -12,6 +12,8 @@ import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.levels.Level;
 import me.luisorlando.screen.GameScreen;
 
+import static me.luisorlando.screen.GameScreen.hilos;
+
 public class Player {
     private List<Entity> birds;
     private Level nivel;
@@ -77,7 +79,7 @@ public class Player {
 
     private void gameOver() {
         cambiandoNivel = true;
-        new Thread() {
+        Thread t = new Thread() {
             @Override
             public void run() {
                 try {
@@ -86,12 +88,14 @@ public class Player {
                 }
                 System.out.println("Juego perdido.");
             }
-        }.start();
+        };
+        t.start();
+        hilos.add(t);
     }
 
     private void gameWin() {
         cambiandoNivel = true;
-        new Thread() {
+        Thread t = new Thread() {
             @Override
             public void run() {
                 try {
@@ -101,7 +105,9 @@ public class Player {
                 GameScreen.player.addPuntos(nivel.getPuntosPajarosRestantes());
                 System.out.println("Juego ganado.");
             }
-        }.start();
+        };
+        t.start();
+        hilos.add(t);
     }
 
     public void restartPuntos() {

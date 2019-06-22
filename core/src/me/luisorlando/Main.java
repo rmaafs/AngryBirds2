@@ -15,7 +15,6 @@ public class Main extends Game {
 	public static AssetManager manager;
 
 	private IntroScreen introScreen;
-	private LevelSelectorScreen levelSelectorScreen;
 
 	@Override
 	public void create() {
@@ -57,12 +56,7 @@ public class Main extends Game {
 	}
 
 	public void openLevelSelector() {
-		/*if (levelSelectorScreen == null){
-			levelSelectorScreen = new LevelSelectorScreen(this);
-		}
-		if (GameScreen.player != null){
-			GameScreen.player = null;
-		}*/
+		if (getScreen() != null) getScreen().dispose();
 		setScreen(new LevelSelectorScreen(this));
 	}
 
