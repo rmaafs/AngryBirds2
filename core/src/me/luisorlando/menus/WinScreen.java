@@ -25,6 +25,7 @@ public class WinScreen extends Actor {
     private World world;
     private Body body;
     private int size = 10;
+    private ClickListener clickListener;
 
     public WinScreen(World world, Stage stage, Vector2 position, Main game) {
         this.world = world;
@@ -36,12 +37,18 @@ public class WinScreen extends Actor {
     }
 
     private void registrarEventos(final Main game) {
-        this.addListener(new ClickListener() {
+        clickListener = new ClickListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                removerEventos();
                 game.openLevelSelector();
                 return true;
             }
-        });
+        };
+        this.addListener(clickListener);
+    }
+
+    private void removerEventos() {
+        this.removeListener(clickListener);
     }
 
     private void createBox(Vector2 position) {

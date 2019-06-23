@@ -95,7 +95,6 @@ public class Entity extends Actor {
                 prex = body.getPosition().x;
                 prey = body.getPosition().y;
                 contadorEliminar();
-                System.out.println("PING");
             }
         };
         t.start();

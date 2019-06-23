@@ -28,7 +28,7 @@ import static me.luisorlando.Main.inputs;
 
 public class GameScreen extends Pantalla {
 
-    private boolean debugBox2d = false;
+    private boolean debugBox2d = true;
 
     private Stage stage;
     private World world;
@@ -147,14 +147,16 @@ public class GameScreen extends Pantalla {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for (int i = 0; i < bodies.size; i++) {
-            world.destroyBody(bodies.get(i));
+            //world.destroyBody(bodies.get(i));
+            bodies.get(i).setTransform(new Vector2(-10, -10), 0f);
         }
 
-        stage.dispose();
-        world.dispose();
+        /*stage.dispose();
+        world.dispose();*/
         for (Thread t : hilos) {
             t.stop();
         }
+        hilos.clear();
         hilos = null;
         if (debugBox2d) renderer.dispose();
         player = null;

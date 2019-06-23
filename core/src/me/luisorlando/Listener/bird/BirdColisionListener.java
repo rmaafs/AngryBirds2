@@ -62,7 +62,7 @@ public class BirdColisionListener implements ContactListener {
                     if (material.getType() == MaterialType.WOOD) {
                         ((Entity) b).removeVelocity(200f, romperMaterial);
                     } else if (material.getType() == MaterialType.STONE) {
-                        ((Entity) b).removeVelocity(800f, romperMaterial);
+                        ((Entity) b).removeVelocity(400f, romperMaterial);
                     } else if (material.getType() == MaterialType.GLASS) {
                         ((Entity) b).removeVelocity(600f, romperMaterial);
                     }
