@@ -7,9 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.luisorlando.Main;
 import me.luisorlando.entity.Entity;
 import me.luisorlando.entity.birds.Bird;
 import me.luisorlando.levels.Level;
+import me.luisorlando.menus.LoseScreen;
+import me.luisorlando.menus.WinScreen;
 import me.luisorlando.screen.GameScreen;
 
 import static me.luisorlando.screen.GameScreen.hilos;
@@ -24,12 +27,14 @@ public class Player {
 
     private World world;
     private Stage stage;
+    private Main game;
 
     private Resortera resortera;
 
-    public Player(World world, Stage stage, Level level) {
+    public Player(World world, Stage stage, Level level, Main game) {
         this.world = world;
         this.stage = stage;
+        this.game = game;
 
         birds = new ArrayList<Entity>();
         resortera = new Resortera(new Vector2(500, 400));
@@ -77,7 +82,7 @@ public class Player {
         }
     }
 
-    private void gameOver() {
+    public void gameOver() {
         cambiandoNivel = true;
         Thread t = new Thread() {
             @Override
@@ -86,6 +91,7 @@ public class Player {
                     Thread.sleep(3000);
                 } catch (Exception e) {
                 }
+                new LoseScreen(world, stage, new Vector2(24, 17), game);
                 System.out.println("Juego perdido.");
             }
         };
@@ -93,7 +99,7 @@ public class Player {
         hilos.add(t);
     }
 
-    private void gameWin() {
+    public void gameWin() {
         cambiandoNivel = true;
         Thread t = new Thread() {
             @Override
@@ -103,6 +109,7 @@ public class Player {
                 } catch (Exception e) {
                 }
                 GameScreen.player.addPuntos(nivel.getPuntosPajarosRestantes());
+                new WinScreen(world, stage, new Vector2(24, 17), game);
                 System.out.println("Juego ganado.");
             }
         };

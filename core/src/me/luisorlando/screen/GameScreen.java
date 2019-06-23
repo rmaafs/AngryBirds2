@@ -55,7 +55,7 @@ public class GameScreen extends Pantalla {
 
         texture = getRecurso("fondo.png");
 
-        player = new Player(world, stage, level);
+        player = new Player(world, stage, level, game);
         new Floor(world, stage, new Vector2(10, 4.3f));
 
         new BotonCirculo("menus/botones/pausar.png", world, stage, new Vector2(46, 28)) {
@@ -123,6 +123,12 @@ public class GameScreen extends Pantalla {
     private void checkTeclas() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.N)) {
             player.nextBird();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+            player.gameWin();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.L)) {
+            player.gameOver();
         }
 
         if (Gdx.input.justTouched() && player.isPlaying()) {

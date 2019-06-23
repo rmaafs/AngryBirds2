@@ -84,8 +84,10 @@ public class BirdColisionListener implements ContactListener {
                 Bird b = nivel.getBirdByBody(fixtureA.getUserData().toString().contains("BIRD") ? fixtureA : fixtureB);
                 e.dañar();
 
-                if (((Entity) b).isFirstColission()) {
-                    b.setTextureDañado();
+                if (b != null) {
+                    if (((Entity) b).isFirstColission()) {
+                        b.setTextureDañado();
+                    }
                 }
             }
         }

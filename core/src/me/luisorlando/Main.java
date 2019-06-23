@@ -42,6 +42,9 @@ public class Main extends Game {
 		manager.load("menus/botones/pausar.png", Texture.class);
 		manager.load("menus/botones/restart.png", Texture.class);
 
+		manager.load("menus/win.png", Texture.class);
+		manager.load("menus/lose.png", Texture.class);
+
 
 		manager.finishLoading();
 
