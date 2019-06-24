@@ -23,4 +23,6 @@ public interface Level {
     void eliminarBird(Bird b);
     void eliminarEnemigo(Enemy b);
     int getPuntosPajarosRestantes();
+
+    int getNumber();
 }

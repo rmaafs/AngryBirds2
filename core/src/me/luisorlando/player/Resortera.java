@@ -16,7 +16,7 @@ public class Resortera extends Actor {
     private TextureRegion texture1, texture2;
     private Vector2 position;
 
-    private Bird nextBird;
+    private Bird nextBird, postBird;//Next bird = el que está en la resortera, postBird, el que está volando.
 
     private float size = 2f;
 
@@ -32,6 +32,7 @@ public class Resortera extends Actor {
     }
 
     public void ponerBird(Bird bird) {
+        postBird = nextBird;
         nextBird = bird;
         ((Entity) nextBird).disableMovement(true);
         ((Entity) nextBird).cambiarPosicion(new Vector2(8, 12));
@@ -41,13 +42,11 @@ public class Resortera extends Actor {
     }
 
     public void clickAire() {
-        if (((Entity) nextBird).isFlying()) {
+        if ((postBird != null && postBird != nextBird && !((Entity) nextBird).isFlying() && ((Entity) postBird).isFlying())) {
+            postBird.poderEspecial();
+        } else if (((Entity) nextBird).isFlying()) {
             nextBird.poderEspecial();
         }
-    }
-
-    public Bird getCurrentBird() {
-        return nextBird;
     }
 
     @Override

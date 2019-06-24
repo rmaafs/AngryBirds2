@@ -87,6 +87,7 @@ public class Level1 implements Level {
         pajaros.add(new BirdRed(stage, world, new Vector2(x -= 2f, floor)));
         pajaros.add(new BirdYellow(stage, world, new Vector2(x -= 1.5, floor)));
         pajaros.add(new BirdWhite(stage, world, new Vector2(x -= 2, floor)));
+        pajaros.add(new BirdWhite(stage, world, new Vector2(x -= 2, floor)));
     }
 
     public boolean sinEnemigos() {
@@ -145,5 +146,10 @@ public class Level1 implements Level {
             }
         }
         return null;
+    }
+
+    @Override
+    public int getNumber() {
+        return 1;
     }
 }

@@ -33,6 +33,8 @@ public class LevelSelectorScreen extends Pantalla {
 
     private BotonLevel btnLevel1, btnLevel2, btnLevel3, btnLevel4, btnLevel5, btnLevel6;
 
+    private int levelUnlocked = 1;
+
     private int zoom = 3;
 
     public LevelSelectorScreen(final Main game) {
@@ -42,7 +44,48 @@ public class LevelSelectorScreen extends Pantalla {
         inputs.addProcessor(stage);
         world = new World(new Vector2(0, -40), true);
         texture = getRecurso("menus/levelselector.png");
+        levelUnlocked = gameLoader.load();
 
+        if (levelUnlocked >= 6) {
+            btnLevel6 = new BotonLevel("menus/botones/level.png", 6, world, stage, new Vector2(37, 27), 0.9f, 0.3f) {
+                @Override
+                public void onclick() {
+                    game.openGame(new Level6());
+                }
+            };
+        }
+        if (levelUnlocked >= 5) {
+            btnLevel5 = new BotonLevel("menus/botones/level.png", 5, world, stage, new Vector2(30, 27), 0.3f, -0.1f) {
+                @Override
+                public void onclick() {
+                    game.openGame(new Level5());
+                }
+            };
+        }
+        if (levelUnlocked >= 4) {
+            btnLevel4 = new BotonLevel("menus/botones/level.png", 4, world, stage, new Vector2(24, 27), 0.65f, 0.2f) {
+                @Override
+                public void onclick() {
+                    game.openGame(new Level4());
+                }
+            };
+        }
+        if (levelUnlocked >= 3) {
+            btnLevel3 = new BotonLevel("menus/botones/level.png", 3, world, stage, new Vector2(17, 27), 0.2f, -0.3f) {
+                @Override
+                public void onclick() {
+                    game.openGame(new Level3());
+                }
+            };
+        }
+        if (levelUnlocked >= 2) {
+            btnLevel2 = new BotonLevel("menus/botones/level.png", 2, world, stage, new Vector2(11, 27), 0.5f, -0.1f) {
+                @Override
+                public void onclick() {
+                    game.openGame(new Level2());
+                }
+            };
+        }
 
         btnLevel1 = new BotonLevel("menus/botones/level.png", 1, world, stage, new Vector2(5, 27), 0.9f, 0.4f) {
             @Override
@@ -51,40 +94,6 @@ public class LevelSelectorScreen extends Pantalla {
             }
         };
 
-        btnLevel2 = new BotonLevel("menus/botones/level.png", 2, world, stage, new Vector2(11, 27), 0.5f, -0.1f) {
-            @Override
-            public void onclick() {
-                game.openGame(new Level2());
-            }
-        };
-
-        btnLevel3 = new BotonLevel("menus/botones/level.png", 3, world, stage, new Vector2(17, 27), 0.2f, -0.3f) {
-            @Override
-            public void onclick() {
-                game.openGame(new Level3());
-            }
-        };
-
-        btnLevel4 = new BotonLevel("menus/botones/level.png", 4, world, stage, new Vector2(24, 27), 0.65f, 0.2f) {
-            @Override
-            public void onclick() {
-                game.openGame(new Level4());
-            }
-        };
-
-        btnLevel5 = new BotonLevel("menus/botones/level.png", 5, world, stage, new Vector2(30, 27), 0.3f, -0.1f) {
-            @Override
-            public void onclick() {
-                game.openGame(new Level5());
-            }
-        };
-
-        btnLevel6 = new BotonLevel("menus/botones/level.png", 6, world, stage, new Vector2(37, 27), 0.9f, 0.3f) {
-            @Override
-            public void onclick() {
-                game.openGame(new Level6());
-            }
-        };
 
         if (debugBox2d) {
             renderer = new Box2DDebugRenderer();
@@ -127,5 +136,13 @@ public class LevelSelectorScreen extends Pantalla {
         stage.dispose();
         world.dispose();
         if (debugBox2d) renderer.dispose();
+    }
+
+    public int getLevelUnlocked() {
+        return levelUnlocked;
+    }
+
+    public void setLevelUnlocked(int levelUnlocked) {
+        this.levelUnlocked = levelUnlocked;
     }
 }

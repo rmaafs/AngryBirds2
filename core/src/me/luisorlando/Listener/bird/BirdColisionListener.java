@@ -36,6 +36,10 @@ public class BirdColisionListener implements ContactListener {
         Body fixtureA = contact.getFixtureA().getBody();
         Body fixtureB = contact.getFixtureB().getBody();
 
+        if (fixtureA == null || fixtureA.getUserData() == null || fixtureB == null || fixtureB.getUserData() == null) {
+            return;
+        }
+
         if ((fixtureA.getUserData().toString().contains("BIRD") && fixtureB.getUserData().toString().contains("MATERIAL"))
                 || (fixtureB.getUserData().toString().contains("BIRD") && fixtureA.getUserData().toString().contains("MATERIAL"))) {
 

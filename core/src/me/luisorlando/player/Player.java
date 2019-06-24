@@ -16,6 +16,7 @@ import me.luisorlando.menus.WinScreen;
 import me.luisorlando.screen.GameScreen;
 
 import static me.luisorlando.screen.GameScreen.hilos;
+import static me.luisorlando.screen.Pantalla.gameLoader;
 
 public class Player {
     private List<Entity> birds;
@@ -40,6 +41,7 @@ public class Player {
         resortera = new Resortera(new Vector2(500, 400));
 
         nivel = level;
+        currentNivel = nivel.getNumber();
 
         generateLevel();
     }
@@ -65,11 +67,6 @@ public class Player {
         nextBird();
         playing = true;
         cambiandoNivel = false;
-    }
-
-    public void restartLevel() {
-        generateLevel();
-        play();
     }
 
     public void comprobarJuegoTerminado() {
@@ -101,6 +98,7 @@ public class Player {
 
     public void gameWin() {
         cambiandoNivel = true;
+        gameLoader.save(currentNivel + 1);
         Thread t = new Thread() {
             @Override
             public void run() {

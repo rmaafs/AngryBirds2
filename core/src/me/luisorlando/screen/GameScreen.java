@@ -147,12 +147,9 @@ public class GameScreen extends Pantalla {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for (int i = 0; i < bodies.size; i++) {
-            //world.destroyBody(bodies.get(i));
             bodies.get(i).setTransform(new Vector2(-10, -10), 0f);
         }
 
-        /*stage.dispose();
-        world.dispose();*/
         for (Thread t : hilos) {
             t.stop();
         }

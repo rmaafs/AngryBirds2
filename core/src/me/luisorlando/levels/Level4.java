@@ -158,4 +158,9 @@ public class Level4 implements Level {
         }
         return null;
     }
+
+    @Override
+    public int getNumber() {
+        return 4;
+    }
 }

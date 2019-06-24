@@ -4,10 +4,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 
 import me.luisorlando.Main;
+import me.luisorlando.savegame.Loader;
 
 public abstract class Pantalla implements Screen {
 
     protected Main game;
+    public static Loader gameLoader = new Loader();
 
     public Pantalla(Main game) {
         this.game = game;
