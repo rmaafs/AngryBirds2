@@ -14,7 +14,9 @@ import me.luisorlando.levels.Level;
 import me.luisorlando.menus.LoseScreen;
 import me.luisorlando.menus.WinScreen;
 import me.luisorlando.screen.GameScreen;
+import me.luisorlando.sounds.SoundType;
 
+import static me.luisorlando.Main.sounds;
 import static me.luisorlando.screen.GameScreen.hilos;
 import static me.luisorlando.screen.Pantalla.gameLoader;
 
@@ -67,6 +69,7 @@ public class Player {
         nextBird();
         playing = true;
         cambiandoNivel = false;
+        sounds.play(SoundType.START_LEVEL);
     }
 
     public void comprobarJuegoTerminado() {
@@ -85,10 +88,11 @@ public class Player {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(30);
                 } catch (Exception e) {
                 }
                 new LoseScreen(world, stage, new Vector2(24, 17), game);
+                sounds.play(SoundType.LOSE_BIRDS);
                 System.out.println("Juego perdido.");
             }
         };
@@ -108,6 +112,7 @@ public class Player {
                 }
                 GameScreen.player.addPuntos(nivel.getPuntosPajarosRestantes());
                 new WinScreen(world, stage, new Vector2(24, 17), game);
+                sounds.play(SoundType.WIN_BIRDS);
                 System.out.println("Juego ganado.");
             }
         };

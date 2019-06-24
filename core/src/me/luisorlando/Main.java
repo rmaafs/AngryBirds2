@@ -9,16 +9,17 @@ import me.luisorlando.levels.Level;
 import me.luisorlando.screen.GameScreen;
 import me.luisorlando.screen.IntroScreen;
 import me.luisorlando.screen.LevelSelectorScreen;
+import me.luisorlando.sounds.SoundEffect;
 
 public class Main extends Game {
 	public static InputMultiplexer inputs = new InputMultiplexer();
 	public static AssetManager manager;
-
-	private IntroScreen introScreen;
+	public static SoundEffect sounds;
 
 	@Override
 	public void create() {
 		manager = new AssetManager();
+		sounds = new SoundEffect();
 
 		manager.load("fondo.png", Texture.class);
         manager.load("resortera.png", Texture.class);
@@ -52,10 +53,7 @@ public class Main extends Game {
 	}
 
 	public void openIntro() {
-		if (introScreen == null) {
-			introScreen = new IntroScreen(this);
-		}
-		setScreen(introScreen);
+		setScreen(new IntroScreen(this));
 	}
 
 	public void openLevelSelector() {

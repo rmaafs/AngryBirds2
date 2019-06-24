@@ -9,8 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import me.luisorlando.Constants;
 import me.luisorlando.screen.GameScreen;
+import me.luisorlando.sounds.SoundType;
 
 import static me.luisorlando.Listener.bird.BirdColisionListener.bodyEliminator;
+import static me.luisorlando.Main.sounds;
 
 public class Material extends Actor{
 
@@ -77,6 +79,14 @@ public class Material extends Actor{
             } else if (type == MaterialType.GLASS) {
                 GameScreen.player.addPuntos(70);
             }
+        }
+
+        if (type == MaterialType.WOOD) {
+            sounds.play(SoundType.BREAK_WOOD);
+        } else if (type == MaterialType.STONE) {
+            sounds.play(SoundType.BREAK_WOOD);
+        } else if (type == MaterialType.GLASS) {
+            sounds.play(SoundType.BREAK_WOOD);
         }
     }
 

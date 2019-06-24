@@ -14,10 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.luisorlando.entity.birds.Bird;
+import me.luisorlando.entity.birds.BirdRed;
 import me.luisorlando.entity.birds.BirdWhite;
+import me.luisorlando.entity.birds.BirdYellow;
 import me.luisorlando.screen.GameScreen;
+import me.luisorlando.sounds.SoundType;
 
 import static me.luisorlando.Listener.bird.BirdColisionListener.bodyEliminator;
+import static me.luisorlando.Main.sounds;
 import static me.luisorlando.screen.GameScreen.hilos;
 
 public class Entity extends Actor {
@@ -99,6 +103,14 @@ public class Entity extends Actor {
         };
         t.start();
         hilos.add(t);
+        sounds.play(SoundType.RESORTERA);
+        if (this instanceof BirdRed) {
+            sounds.play(SoundType.FLY_RED);
+        } else if (this instanceof BirdYellow) {
+            sounds.play(SoundType.FLY_YELLOW);
+        } else if (this instanceof BirdWhite) {
+            sounds.play(SoundType.FLY_WHITE);
+        }
     }
 
     public void contadorEliminar() {
@@ -134,6 +146,7 @@ public class Entity extends Actor {
         this.remove();
         this.setVisible(false);
         GameScreen.player.getNivel().eliminarBird(((Bird) this));
+        sounds.play(SoundType.BIRD_BREAK);
     }
 
     public Body getBody() {
@@ -146,6 +159,15 @@ public class Entity extends Actor {
 
     public void setFirstColission(boolean firstColission) {
         this.firstColission = firstColission;
+        if (firstColission) {
+            if (this instanceof BirdRed) {
+                sounds.play(SoundType.OUCH_RED);
+            } else if (this instanceof BirdYellow) {
+                sounds.play(SoundType.OUCH_YELLOW);
+            } else if (this instanceof BirdWhite) {
+                sounds.play(SoundType.OUCH_WHITE);
+            }
+        }
     }
 
     public boolean isFlying() {
